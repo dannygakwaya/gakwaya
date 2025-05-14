@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Bank Form</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="all">
+  <center>
+  <h2>GAKWAYA Daniel</h2>
+
+  <label for="amount">Enter Amount:</label>
+  <input type="number" id="amount" placeholder="e.g. 500">
+  <br>
+
+  <button onclick="deposit()" class="bl">Deposit</button>
+  <button onclick="withdraw()" class="gn"> Withdraw</button>
+  <button onclick="checkAccount()" class="yl">Check Account</button>
+
+  <div class="output" id="output"></div>
+  </center>
+</div>
+  <script>
+    let balance = 0;
+
+    function deposit() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (!isNaN(amount) && amount > 0) {
+        balance += amount;
+        document.getElementById("output").innerText = `Deposited: $${amount.toFixed(2)}\nNew Balance: $${balance.toFixed(2)}`;
+      } else {
+        alert("Please enter a valid deposit amount.");
+      }
+    }
+
+    function withdraw() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (!isNaN(amount) && amount > 0) {
+        if (amount <= balance) {
+          balance -= amount;
+          document.getElementById("output").innerText = `Withdrawn: $${amount.toFixed(2)}\nNew Balance: $${balance.toFixed(2)}`;
+        } else {
+          alert("Insufficient balance.");
+        }
+      } else {
+        alert("Please enter a valid withdrawal amount.");
+      }
+    }
+
+    function checkAccount() {
+      document.getElementById("output").innerText = `Current Balance: $${balance.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
+    
