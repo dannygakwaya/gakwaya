@@ -1,0 +1,112 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bank Account</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 100%;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    .all {
+      width: 30%;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: cyan;
+      border: 2px solid black;
+      border-radius: 10px;
+      text-align: center;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      width: 85%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+    .bl {
+      background-color: blue;
+    }
+    .gn {
+      background-color: green;
+    }
+    .yl {
+      background-color: orange;
+    }
+    .output {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="all">
+    <h2>GAKWAYA Daniel</h2>
+
+    <label for="depositAmount">Deposit Amount:</label><br>
+    <input type="number" id="depositAmount" placeholder="enter money"><br>
+
+    <button onclick="deposit()" class="bl">Deposit</button>
+
+    <label for="withdrawAmount">Withdraw Amount:</label><br>
+    <input type="number" id="withdrawAmount" placeholder="enter money"><br>
+
+  
+    <button onclick="withdraw()" class="gn">Withdraw</button>
+    <button onclick="checkAccount()" class="yl">Check Account</button>
+
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    let balance = 0;
+
+    function deposit() {
+      const amount = parseFloat(document.getElementById("depositAmount").value);
+      if (!isNaN(amount) && amount > 0) {
+        balance += amount;
+        document.getElementById("output").innerText = `Deposited: $${amount.toFixed(2)}\nNew Balance: $${balance.toFixed(2)}`;
+        document.getElementById("depositAmount").value = '';
+      } else {
+        alert("Please enter a valid deposit amount.");
+      }
+    }
+
+    function withdraw() {
+      const amount = parseFloat(document.getElementById("withdrawAmount").value);
+      if (!isNaN(amount) && amount > 0) {
+        if (amount <= balance) {
+          balance -= amount;
+          document.getElementById("output").innerText = `Withdrawn: $${amount.toFixed(2)}\nNew Balance: $${balance.toFixed(2)}`;
+          document.getElementById("withdrawAmount").value = '';
+        } else {
+          alert("Insufficient balance.");
+        }
+      } else {
+        alert("Please enter a valid withdrawal amount.");
+      }
+    }
+
+    function checkAccount() {
+      document.getElementById("output").innerText = `Current Balance: $${balance.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
